@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        /* Custom Styles */
+        .chat-container {
+            max-width: 100%; /* Set the maximum width of the chat container */
+            height: 92vh; /* Set the height of the chat container */
+            overflow: hidden;
+        }
+
+        #chat-display {
+            height: 80%; /* Set the height of the chat display area */
+            overflow-y: auto; /* Enable vertical scrolling if messages exceed the height */
+        }
+
+        .user-message {
+            text-align: right;
+        }
+
+        .bot-message {
+            text-align: left;
+        }
+
+        #user-input {
+            width: calc(100% - 8px); /* Adjusted width to accommodate the button's padding and border */
+        }
+    </style>
+    <title>Mira Bot Dashboard</title>
+</head>
+<body class="bg-white font-roboto flex flex-col h-screen overflow-hidden">
+
+    <!-- Header with Title -->
+    <header class="bg-black text-white p-4 flex items-center">
+        <h1 class="text-3xl text-purple-800 font-bold">Mira AI</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex flex-col ">
+
+        <!-- Chatbot Container -->
+        <div class="chat-container bg-white  border-none mb-10 mx-4 lg:mx-10 xl:mx-80 2xl:mx-80 overflow-hidden">
+            <!-- Chat Display Area -->
+            <div id="chat-display" class="p-4 bg-white h-full  ">
+                <!-- Chat messages will be displayed here -->
+                <div class="user-message text-gray-600 p-4">User: Hello! Can you help me with something?</div>
+                <div class="bot-message text-gray-600">Mira Bot: Of course! What do you need assistance with?</div>
+            </div>
+
+            <!-- Chat Input Area -->
+            <div class="flex items-center p-4 pb-0 mt-10 mb-0">
+                <input type="text" id="user-input" placeholder="Type your message..." class="flex-1 mr-1 p-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
+                <button onclick="sendMessage()" class="bg-blue-500 text-white p-2 rounded-r-md">Send</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-gray-600 p-4">
+        <p class="text-white">&copy; 2024 Mira Bot Inc. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function sendMessage() {
+            const userMessage = document.getElementById('user-input').value;
+            const chatDisplay = document.getElementById('chat-display');
+            
+            // Append user's message to the chat display on the right
+            chatDisplay.innerHTML += `<div class="user-message text-gray-600">User: ${userMessage}</div>`;
+
+            // You can replace the logic below with actual chatbot response logic
+            setTimeout(() => {
+               
+                chatDisplay.innerHTML += `<div class="bot-message text-gray-600">Mira Bot: Thank you for your message. How can I assist you?</div>`;
+                
+                
+                chatDisplay.scrollTop = chatDisplay.scrollHeight;
+            }, 500);
+            
+            // Clear the input field
+            document.getElementById('user-input').value = '';
+        }
+    </script>
+
+</body>
+</html>
